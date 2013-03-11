@@ -1,0 +1,92 @@
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: Tahoma, Verdana, sans-serif;
+}
+
+body {
+  font-size: 12px;
+}
+
+body > * {
+  position: fixed;
+  border: 1px solid black;
+}
+
+body > div, body > form {
+  overflow-y: scroll;
+}
+
+h1 {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+  width: 80px;
+}
+
+textarea {
+  display: block;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+#list {
+  top: 50px;
+  left: 0;
+  right: 0;
+  height: 200px;
+}
+
+.row.header {
+  background-color: #888;
+}
+
+.row > span {
+  display: inline-block;
+}
+
+.row > .action {
+  width: 120px;
+}
+.row > .method {
+  width: 100px;
+}
+
+#detail {
+  top: 250px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.row {
+  padding: 3px;
+}
+
+input[name="url"] {
+  width: 800px;
+}
+
+.row.b, .row.c, .row.d {
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+  padding: 5px 0;
+}
+
+.deleteBtn {
+  float: right;
+  font-size: 10px;
+}
+
+.hidden {
+  display: none;
+}

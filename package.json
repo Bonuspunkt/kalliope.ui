@@ -1,0 +1,23 @@
+{
+  "name": "kalliope.ui",
+  "version": "0.0.1",
+  "description": "problem inflicting proxy?",
+  "main": "index.js",
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 0.9"
+  },
+  "dependencies": {
+    "joinbuffers": "~0.1.1",
+    "mu2": "~0.5.17",
+    "send": "~0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "Bonuspunkt",
+  "license": "BSD",
+  "readmeFilename": "README.md"
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>kalliope</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+  </head>
+  <body>
+    <h1>kalliope.ui</h1>
+
+    <div id="list">
+      <div class="row header">
+        <span class="action">action</span>
+        <span class="method">method</span>
+        <span class="url">url</span>
+      </div>
+      {{#actions}}
+      <form method="POST" class="row">
+        <input type="hidden" name="id" value="{{id}}" />
+        <span class="action">{{action}}</span>
+        <span class="method">{{method}}</span>
+        <span class="url">{{url}}</span>
+        <input type="submit" class="deleteBtn" value="delete" />
+      </form>
+      {{/actions}}
+    </div>
+
+    <form id="detail" method="POST">
+      <div class="row">
+        <label>method</label>
+        <input list="methods" name="method">
+        <datalist id="methods">
+          <option value="GET">
+          <option value="POST">
+          <option value="PUT">
+          <option value="DELETE">
+        </datalist>
+      </div>
+
+      <div class="row">
+        <label>url</label>
+        <input name="url" placeholder="regex" />
+      </div>
+
+      <div class="row">
+        <label>action</label>
+        <select name="action">
+          <option value="">proxy (default)</option>
+          <option value="b">blackhole</option>
+          <option value="c">custom response</option>
+          <option value="d">delay</option>
+        </select>
+      </div>
+
+      <div class="row b">
+        NOTE: node will terminate connections after 120sec
+      </div>
+
+      <div class="row c">
+        <label>statuscode</label>
+        <input name="statusCode">
+
+        <label style="display: block">headers</label>
+        <textarea name="headers"></textarea>
+
+        <label style="display: block">body</label>
+        <textarea name="body"></textarea>
+      </div>
+
+      <div class="row d">
+        <label>delay</label>
+        <input name="delay"/>
+        ms
+      </div>
+
+      <div class="row">
+        <input type="submit" value="add rule"/>
+      </div>
+
+    </form>
+
+    <script src="script.js"></script>
+  </body>
+</html>
