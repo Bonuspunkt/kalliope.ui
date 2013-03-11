@@ -7,6 +7,8 @@ var mu = require('mu2');
 var send = require('send');
 var joinbuffers = require('joinbuffers');
 
+http.globalAgent.maxSockets = 1e3;
+
 var wwwRoot = path.resolve(__dirname, 'wwwRoot');
 mu.root = path.resolve(__dirname, 'templates');
 
@@ -23,10 +25,10 @@ function proxy(parsed, proxyReq, proxyRes) {
 }
 
 
-var id = 0;
-function getId() {
-  return ++id;
-}
+var getId = (function() {
+  var id = 0;
+  return function() { return ++id; }
+}());
 
 var actions = [];
 
@@ -49,7 +51,6 @@ function processBody(body) {
 
   switch (body.action) {
     case 'b':
-      // todo: blackhole action
       actions.push({
         id: getId(),
         action: 'blackhole',
@@ -103,6 +104,7 @@ http.createServer(function(proxyReq, proxyRes) {
     var action = actions.filter(function(action) {
       return action.method.test(proxyReq.url) && action.url.test(proxyReq.url);
     })[0];
+
     return ((action && action.fn) || proxy)(parsed, proxyReq, proxyRes);
   }
 

@@ -71,6 +71,9 @@ textarea {
 .row {
   padding: 3px;
 }
+#list .row:nth-child(even) {
+  background: #ccc;
+}
 
 input[name="url"] {
   width: 800px;
