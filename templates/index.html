@@ -15,7 +15,7 @@
         <span class="url">url</span>
       </div>
       {{#actions}}
-      <form method="POST" class="row">
+      <form method="POST" enctype="multipart/form-data" class="row">
         <input type="hidden" name="id" value="{{id}}" />
         <span class="action">{{action}}</span>
         <span class="method">{{method}}</span>
@@ -25,7 +25,7 @@
       {{/actions}}
     </div>
 
-    <form id="detail" method="POST">
+    <form id="detail" method="POST" enctype="multipart/form-data">
       <div class="row">
         <label>method</label>
         <input list="methods" name="method">

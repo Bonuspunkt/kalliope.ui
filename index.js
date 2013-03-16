@@ -1,11 +1,10 @@
 var http = require('http');
 var path = require('path');
-var querystring = require('querystring');
 var url = require('url');
 
 var mu = require('mu2');
 var send = require('send');
-var joinbuffers = require('joinbuffers');
+var formidable = require('formidable');
 
 http.globalAgent.maxSockets = 1e3;
 
@@ -33,7 +32,6 @@ var getId = (function() {
 var actions = [];
 
 function processBody(body) {
-
   if (body.id) {
     body.id = Number(body.id);
     var toDelete = actions.filter(function(action) {
@@ -92,6 +90,7 @@ function processBody(body) {
       });
       break;
   }
+  console.log(body);
 }
 
 http.createServer(function(proxyReq, proxyRes) {
@@ -117,23 +116,40 @@ http.createServer(function(proxyReq, proxyRes) {
 
   if (proxyReq.url === '/') {
     var hasBody = proxyReq.method === 'POST';
-    var body = [];
+
     if (hasBody) {
-      proxyReq.on('data', function(chunk) {
-        body.push(chunk);
-      });
-      proxyReq.on('end', function() {
-        if (hasBody) {
-          body = joinbuffers(body).toString('utf8');
-          body = querystring.parse(body);
-          processBody(body);
-        }
+      var form = new formidable.IncomingForm();
+
+      form.parse(proxyReq, function(err, fields, files) {
+        processBody(fields);
+
         renderPage();
       });
     } else {
       renderPage();
     }
     return;
+  }
+  if (proxyReq.url === '/rules') {
+    var form = new formidable.IncomingForm();
+
+    form.parse(proxyReq, function(err, fields, files) {
+      processBody(fields);
+      proxyRes.writeHead(200, {'content-type': 'application/json'});
+      proxyRes.end(
+        JSON.stringify(
+          actions.map(function(action) {
+            return {
+              id: action.id,
+              action: action.action,
+              method: action.method.toString(),
+              url: action.url.toString()
+            };
+          })
+        )
+      );
+    });
+
   }
 
   // provide settings page
