@@ -26,7 +26,7 @@ function proxy(parsed, proxyReq, proxyRes) {
 
 var getId = (function() {
   var id = 0;
-  return function() { return ++id; }
+  return function() { return ++id; };
 }());
 
 var actions = [];
@@ -90,7 +90,6 @@ function processBody(body) {
       });
       break;
   }
-  console.log(body);
 }
 
 http.createServer(function(proxyReq, proxyRes) {
@@ -114,11 +113,12 @@ http.createServer(function(proxyReq, proxyRes) {
     return;
   }
 
+  var form;
   if (proxyReq.url === '/') {
     var hasBody = proxyReq.method === 'POST';
 
     if (hasBody) {
-      var form = new formidable.IncomingForm();
+      form = new formidable.IncomingForm();
 
       form.parse(proxyReq, function(err, fields, files) {
         processBody(fields);
@@ -131,7 +131,7 @@ http.createServer(function(proxyReq, proxyRes) {
     return;
   }
   if (proxyReq.url === '/rules') {
-    var form = new formidable.IncomingForm();
+    form = new formidable.IncomingForm();
 
     form.parse(proxyReq, function(err, fields, files) {
       processBody(fields);
@@ -158,5 +158,5 @@ http.createServer(function(proxyReq, proxyRes) {
     .root(wwwRoot)
     .pipe(proxyRes);
 
-}).listen(8000);
-console.log('proxy running at port 8000');
+}).listen(8000, '127.0.0.1');
+console.log('proxy running at http://127.0.0.1:8000');

@@ -39,7 +39,7 @@
       });
 
       listEl.insertAdjacentHTML('beforeend', html);
-    })
+    });
   }
 
   function clearDetail() {
