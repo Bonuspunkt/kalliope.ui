@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "mu2": "~0.5.17",
-    "send": "~0.1.0",
-    "formidable": "~1.0.12"
+    "send": "~0.15.4",
+    "formidable": "~1.1.1"
   },
   "devDependencies": {},
   "scripts": {
