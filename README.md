@@ -1,5 +1,7 @@
 # kalliope.ui
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Bonuspunkt/kalliope.ui.svg)](https://greenkeeper.io/)
+
 alright, this is the most minimal version of a proxy to test the clientside request/response handling.
 
 You can alter the response in various ways:
